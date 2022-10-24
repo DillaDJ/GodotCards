@@ -1,0 +1,217 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Cards/Card/CARDC.TTF" type="FontFile" id=1]
+
+[sub_resource type="CompressedTexture2D" id=5]
+flags = 4
+load_path = "res://.import/CardBack.png-84fe4d0c362f5df8e0767f849879dad4.stex"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Sprite2D
+
+
+signal card_clicked()
+signal card_selected(selected_state)
+
+
+var card_front = preload(\"res://Cards/Card/CardFront.png\")
+
+enum suits { HIDDDEN = -1, CLUBS, SPADES, DIAMONDS, HEARTS }
+
+var club_graphic = preload(\"res://Cards/Card/Club.png\")
+var spade_graphic = preload(\"res://Cards/Card/Spade.png\")
+var diamond_graphic = preload(\"res://Cards/Card/Diamond.png\")
+var heart_graphic = preload(\"res://Cards/Card/Heart.png\")
+
+
+var suit = suits.HIDDDEN
+var card_value = 1
+
+var raw_value = -1
+
+@export var static_card = false
+var unplayable = false
+
+
+func _ready():
+	if !static_card:
+		$CollisionObject3D.connect(\"collision_clicked\",Callable(self,\"click_card\"))
+
+
+func show_card(new_value):
+	raw_value = new_value
+	
+	suit = int(new_value / 13)
+	card_value = (new_value % 13) + 2
+	
+	var text_value
+	
+	texture = card_front
+	
+	match suit:
+		suits.CLUBS:
+			$CardFace/SuitGraphic.texture = club_graphic
+			
+		suits.SPADES:
+			$CardFace/SuitGraphic.texture = spade_graphic
+			
+		suits.DIAMONDS:
+			$CardFace/SuitGraphic.texture = diamond_graphic
+			
+		suits.HEARTS:
+			$CardFace/SuitGraphic.texture = heart_graphic
+	
+	match card_value:
+		11:
+			text_value = \"J\"
+		
+		12:
+			text_value = \"Q\"
+		
+		13:
+			text_value = \"K\"
+			
+		14:
+			text_value = \"A\"
+		
+		_:
+			text_value = str(card_value)
+	
+	$CardFace/TLValue.text = text_value
+	$CardFace/BRValue.text = text_value
+	
+	$CardFace.show()
+
+
+func click_card(button_idx):
+	if button_idx == 0:
+		emit_signal(\"card_clicked\")
+	else:
+		toggle_select()
+
+
+func dim():
+	if !static_card:
+		unplayable = true
+	
+	$Dim.show()
+
+
+func undim():
+	if !static_card:
+		unplayable = false
+	
+	$Dim.hide()
+
+
+func toggle_select():
+	if !unplayable and !static_card:
+		var select = $Select
+		
+		if select.is_visible_in_tree():
+			emit_signal(\"card_selected\", false)
+			select.hide()
+		
+		else:
+			emit_signal(\"card_selected\", true)
+			select.show()
+
+
+func is_selected():
+	return $Select.is_visible_in_tree()
+"
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Area2D
+
+
+signal collision_clicked(button_idx)
+
+
+func _input_event(_viewport, event, _shape_idx):
+	if event.is_action_released(\"left_click\"):
+		emit_signal(\"collision_clicked\", 0)
+	elif event.is_action_released(\"right_click\"):
+		emit_signal(\"collision_clicked\", 1)
+"
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 304, 485 )
+
+[sub_resource type="CompressedTexture2D" id=8]
+flags = 4
+load_path = "res://.import/Club.png-3e27216c1fb9bac4ee5ae308f8608958.stex"
+
+[sub_resource type="FontFile" id=2]
+size = 150
+font_data = ExtResource( 1 )
+
+[sub_resource type="FontFile" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/fonts/font = SubResource( 2 )
+
+[sub_resource type="CompressedTexture2D" id=10]
+flags = 4
+load_path = "res://.import/Dim.png-6236ba4758c43cb39196836b41dca7ec.stex"
+
+[sub_resource type="CompressedTexture2D" id=11]
+flags = 4
+load_path = "res://.import/Select.png-7ced38d874d8c084faf45d29d1142081.stex"
+
+[node name="Card" type="Sprite2D"]
+position = Vector2( 0, -48 )
+scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 5 )
+script = SubResource( 6 )
+
+[node name="CollisionObject3D" type="Area2D" parent="."]
+script = SubResource( 7 )
+
+[node name="CollisionShape3D" type="CollisionShape2D" parent="CollisionObject3D"]
+position = Vector2( -2.86102e-05, 0 )
+shape = SubResource( 1 )
+
+[node name="CardFace" type="Node2D" parent="."]
+visible = false
+position = Vector2( -320, -480 )
+
+[node name="SuitGraphic" type="Sprite2D" parent="CardFace"]
+position = Vector2( 320, 480 )
+texture = SubResource( 8 )
+
+[node name="TLValue" type="Label" parent="CardFace"]
+offset_right = 196.0
+offset_bottom = 181.0
+theme = SubResource( 4 )
+text = "A"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BRValue" type="Label" parent="CardFace"]
+offset_left = 444.0
+offset_top = 800.0
+offset_right = 640.0
+offset_bottom = 981.0
+theme = SubResource( 4 )
+text = "A"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dim" type="Sprite2D" parent="."]
+visible = false
+position = Vector2( -5.72204e-05, -0.00012207 )
+texture = SubResource( 10 )
+
+[node name="Select" type="Sprite2D" parent="."]
+visible = false
+position = Vector2( -5.72204e-05, -0.00012207 )
+texture = SubResource( 11 )
