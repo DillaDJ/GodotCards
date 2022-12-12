@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgoaas3ev4p8o"]
+
+[ext_resource type="Script" path="res://Scum/Hand.gd" id="1_1ot0j"]
+
+[sub_resource type="Curve2D" id="Curve2D_whhaw"]
+_data = {
+"points": PackedVector2Array(-128.03, 47.9758, 128.03, -47.9758, -192, 0, -128.083, -48.1336, 128.083, 48.1336, 192, 0)
+}
+point_count = 2
+
+[node name="Hand" type="Node2D"]
+script = ExtResource("1_1ot0j")
+
+[node name="Cards" type="Node2D" parent="."]
+
+[node name="CardPath" type="Path2D" parent="."]
+position = Vector2(-7.62939e-06, 16)
+curve = SubResource("Curve2D_whhaw")
+
+[node name="PositionSetter" type="PathFollow2D" parent="CardPath"]
+position = Vector2(-192, 0)
+rotation = -0.358528
+loop = false

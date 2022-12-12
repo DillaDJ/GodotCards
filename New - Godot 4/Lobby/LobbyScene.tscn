@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=3 uid="uid://dqoabk4js2dv1"]
+
+[ext_resource type="Theme" uid="uid://cx1hwmnnhtbn3" path="res://UITheme.tres" id="1_ebu88"]
+[ext_resource type="PackedScene" uid="uid://cyxj37lfk4n61" path="res://Lobby/ConnectionUI.tscn" id="1_ur2i7"]
+[ext_resource type="Script" path="res://Lobby/ConnectionUI.gd" id="2_cibt7"]
+[ext_resource type="Script" path="res://Lobby/BGCards.gd" id="2_koq5k"]
+[ext_resource type="FontFile" uid="uid://dk7klsru5ya6t" path="res://Scum/Card/CARDC.TTF" id="3_coitt"]
+[ext_resource type="Script" path="res://Lobby/Lobby.gd" id="3_ku2ug"]
+[ext_resource type="PackedScene" uid="uid://cufku5m34kupi" path="res://MessageBox.tscn" id="3_u5mdt"]
+[ext_resource type="Script" path="res://Lobby/StartButton.gd" id="4_ba58t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1ddj"]
+bg_color = Color(0.133333, 0.231373, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51btr"]
+bg_color = Color(0, 0, 0, 0.235294)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydsvl"]
+font = ExtResource("3_coitt")
+font_size = 54
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tk3w"]
+bg_color = Color(0.137255, 0.137255, 0.160784, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhv27"]
+bg_color = Color(0.215686, 0.215686, 0.235294, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Base" type="Node"]
+
+[node name="BGPanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ebu88")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k1ddj")
+
+[node name="BGCards" type="Node2D" parent="BGPanel"]
+script = ExtResource("2_koq5k")
+
+[node name="BGDarkener" type="Panel" parent="BGPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_51btr")
+
+[node name="StatusMessageLayout" type="VBoxContainer" parent="BGPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 89.0
+grow_horizontal = 2
+
+[node name="Spacer" type="Control" parent="BGPanel/StatusMessageLayout"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="StatusMessage" parent="BGPanel/StatusMessageLayout" instance=ExtResource("3_u5mdt")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="TitleLayout" type="VBoxContainer" parent="BGPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_right = 125.0
+offset_bottom = 89.0
+grow_horizontal = 2
+
+[node name="Spacer" type="Control" parent="BGPanel/TitleLayout"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="BGPanel/TitleLayout"]
+layout_mode = 2
+text = "Tycoon"
+label_settings = SubResource("LabelSettings_ydsvl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConnectionInterface" parent="BGPanel" instance=ExtResource("1_ur2i7")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = -95.5
+offset_right = 112.5
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_cibt7")
+
+[node name="Lobby" type="VBoxContainer" parent="BGPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -41.5
+offset_right = 100.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_ku2ug")
+
+[node name="PlayerList" type="PanelContainer" parent="BGPanel/Lobby"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="BGPanel/Lobby/PlayerList"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 4
+
+[node name="Spacer" type="Control" parent="BGPanel/Lobby"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="BGPanel/Lobby"]
+custom_minimum_size = Vector2(220, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_5tk3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uhv27")
+disabled = true
+text = "Start"
+script = ExtResource("4_ba58t")
