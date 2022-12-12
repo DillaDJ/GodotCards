@@ -30,7 +30,9 @@ func hide_how_to_play_ui() -> void:
 func show_rules(page_num : int) -> void:
 	for i in range(rule_pages.size()):
 		if i == page_num:
+			buttons[i].button_pressed = true
 			rule_pages[i].show()
 			continue
 		
 		buttons[i].button_pressed = false
+		rule_pages[i].hide()
