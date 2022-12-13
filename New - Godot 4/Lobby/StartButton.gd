@@ -1,6 +1,6 @@
 extends Button
 
-const tycoon_scene_path := "res://Scum/TycoonScene.tscn"
+const tycoon_scene_path := "res://Tycoon/TycoonScene.tscn"
 
 
 func _ready() -> void:

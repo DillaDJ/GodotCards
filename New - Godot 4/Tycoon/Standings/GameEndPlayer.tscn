@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b08wo7r4pn5ns"]
+
+[ext_resource type="FontFile" uid="uid://dk7klsru5ya6t" path="res://Tycoon/Card/CARDC.TTF" id="1_4qyut"]
+[ext_resource type="Script" path="res://Tycoon/Standings/GameEndPlayer.gd" id="1_bbdd2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehlx0"]
+font = ExtResource("1_4qyut")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rw1k"]
+font = ExtResource("1_4qyut")
+font_size = 20
+
+[node name="GameEndPlayer" type="HBoxContainer"]
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_bbdd2")
+
+[node name="PlayerStanding" type="Label" parent="."]
+layout_mode = 2
+text = "2. "
+label_settings = SubResource("LabelSettings_ehlx0")
+
+[node name="PlayerName" type="Label" parent="."]
+layout_mode = 2
+text = "Player 2"
+label_settings = SubResource("LabelSettings_1rw1k")

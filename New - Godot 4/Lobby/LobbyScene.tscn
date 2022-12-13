@@ -1,13 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqoabk4js2dv1"]
+[gd_scene load_steps=20 format=3 uid="uid://1q6e07eujioe"]
 
 [ext_resource type="Theme" uid="uid://cx1hwmnnhtbn3" path="res://UITheme.tres" id="1_ebu88"]
 [ext_resource type="PackedScene" uid="uid://cyxj37lfk4n61" path="res://Lobby/ConnectionUI.tscn" id="1_ur2i7"]
 [ext_resource type="Script" path="res://Lobby/ConnectionUI.gd" id="2_cibt7"]
 [ext_resource type="Script" path="res://Lobby/BGCards.gd" id="2_koq5k"]
-[ext_resource type="FontFile" uid="uid://dk7klsru5ya6t" path="res://Scum/Card/CARDC.TTF" id="3_coitt"]
+[ext_resource type="FontFile" uid="uid://dk7klsru5ya6t" path="res://Tycoon/Card/CARDC.TTF" id="3_coitt"]
 [ext_resource type="Script" path="res://Lobby/Lobby.gd" id="3_ku2ug"]
 [ext_resource type="PackedScene" uid="uid://cufku5m34kupi" path="res://MessageBox.tscn" id="3_u5mdt"]
 [ext_resource type="Script" path="res://Lobby/StartButton.gd" id="4_ba58t"]
+[ext_resource type="Texture2D" uid="uid://c5x6gfiistu47" path="res://Tycoon/LeaveIcon.png" id="9_2jcy2"]
+[ext_resource type="Script" path="res://Lobby/ExitGame.gd" id="9_gxqmc"]
+[ext_resource type="PackedScene" uid="uid://b7prk2dwncgs2" path="res://Tycoon/HowToPlay.tscn" id="10_10mv2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1ddj"]
 bg_color = Color(0.133333, 0.231373, 0.141176, 1)
@@ -34,6 +37,27 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klhp0"]
+bg_color = Color(0.0745098, 0.0705882, 0.0862745, 0.784314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dba5h"]
+bg_color = Color(0.286275, 0.27451, 0.317647, 0.784314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7e5v"]
+bg_color = Color(0.0745098, 0.0705882, 0.0862745, 0.784314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [node name="Base" type="Node"]
 
@@ -151,3 +175,34 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_uhv27")
 disabled = true
 text = "Start"
 script = ExtResource("4_ba58t")
+
+[node name="ExitGame" type="Control" parent="BGPanel"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("9_gxqmc")
+
+[node name="ExitButton" type="Button" parent="BGPanel/ExitGame"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+tooltip_text = "Exit Game"
+theme_override_styles/normal = SubResource("StyleBoxFlat_klhp0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dba5h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l7e5v")
+icon = ExtResource("9_2jcy2")
+expand_icon = true
+
+[node name="HowToPlay" parent="BGPanel" instance=ExtResource("10_10mv2")]
+layout_mode = 1

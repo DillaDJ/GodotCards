@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var card_scn := preload("res://Scum/Card/Card.tscn")
+var card_scn := preload("res://Tycoon/Card/Card.tscn")
 
 const max_cards := 200
 
@@ -14,10 +14,10 @@ func _ready():
 	
 	for i in range(card_num):
 		var card = card_scn.instantiate()
-		
+
 		card.position = Vector2(randi() % screen_width, randi() % screen_height)
 		card.rotation = randi() % 360
-		
+
 		card.show_card(randi() % 53)
-		
+
 		add_child(card)

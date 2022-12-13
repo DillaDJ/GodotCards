@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://ox5ogvds1dcl"]
+
+[ext_resource type="Texture2D" uid="uid://dtcw4emihf4wo" path="res://Tycoon/Card/CardBack.png" id="1_k1ys6"]
+[ext_resource type="Script" path="res://Tycoon/Card/Card.gd" id="2_2d7m3"]
+[ext_resource type="Script" path="res://Tycoon/Card/CardCollision.gd" id="3_8s15j"]
+[ext_resource type="LabelSettings" uid="uid://027yurtj14mv" path="res://Tycoon/Card/CardLabelSettings.tres" id="4_735f1"]
+[ext_resource type="Texture2D" uid="uid://iob7g8c047sy" path="res://Tycoon/Card/Dim.png" id="5_5fpg4"]
+[ext_resource type="Texture2D" uid="uid://d2hudcrvbv8b1" path="res://Tycoon/Card/Select.png" id="6_r8ote"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inlnt"]
+size = Vector2(640, 1000)
+
+[node name="Card" type="Sprite2D"]
+position = Vector2(0, -48)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_k1ys6")
+script = ExtResource("2_2d7m3")
+
+[node name="Collision" type="Area2D" parent="."]
+script = ExtResource("3_8s15j")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-2.92063e-05, 0)
+shape = SubResource("RectangleShape2D_inlnt")
+
+[node name="CardFace" type="Node2D" parent="."]
+visible = false
+
+[node name="SuitGraphic" type="Sprite2D" parent="CardFace"]
+
+[node name="Text" type="Control" parent="CardFace"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -320.0
+offset_top = -500.0
+offset_right = 320.0
+offset_bottom = 500.0
+
+[node name="TLValue" type="Label" parent="CardFace/Text"]
+custom_minimum_size = Vector2(185, 185)
+layout_mode = 1
+offset_right = 185.0
+offset_bottom = 185.0
+size_flags_horizontal = 0
+text = "A"
+label_settings = ExtResource("4_735f1")
+horizontal_alignment = 1
+
+[node name="BRValue" type="Label" parent="CardFace/Text"]
+custom_minimum_size = Vector2(185, 185)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -185.0
+offset_top = -185.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "A"
+label_settings = ExtResource("4_735f1")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Dim" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-5.72204e-05, -0.00012207)
+texture = ExtResource("5_5fpg4")
+
+[node name="Select" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-5.72204e-05, -0.00012207)
+texture = ExtResource("6_r8ote")

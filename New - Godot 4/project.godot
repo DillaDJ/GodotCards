@@ -12,17 +12,17 @@ _global_script_classes=[{
 "base": "Sprite2D",
 "class": &"Card",
 "language": &"GDScript",
-"path": "res://Scum/Card/Card.gd"
+"path": "res://Tycoon/Card/Card.gd"
 }, {
 "base": "Node",
 "class": &"Dealer",
 "language": &"GDScript",
-"path": "res://Scum/Dealer.gd"
+"path": "res://Tycoon/Dealer.gd"
 }, {
 "base": "Node2D",
 "class": &"Hand",
 "language": &"GDScript",
-"path": "res://Scum/Hand.gd"
+"path": "res://Tycoon/Hand.gd"
 }, {
 "base": "Panel",
 "class": &"LobbyPlayer",
@@ -32,17 +32,17 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"PlayerHelper",
 "language": &"GDScript",
-"path": "res://Scum/PlayerHelper.gd"
+"path": "res://Tycoon/PlayerHelper.gd"
 }, {
 "base": "Node",
-"class": &"ScumGameMaster",
+"class": &"TycoonGameMaster",
 "language": &"GDScript",
-"path": "res://Scum/ScumGameMaster.gd"
+"path": "res://Tycoon/TycoonGameMaster.gd"
 }, {
 "base": "Node",
-"class": &"ScumPlayer",
+"class": &"TycoonPlayer",
 "language": &"GDScript",
-"path": "res://Scum/ScumPlayer.gd"
+"path": "res://Tycoon/TycoonPlayer.gd"
 }]
 _global_script_class_icons={
 "Card": "",
@@ -50,8 +50,8 @@ _global_script_class_icons={
 "Hand": "",
 "LobbyPlayer": "",
 "PlayerHelper": "",
-"ScumGameMaster": "",
-"ScumPlayer": ""
+"TycoonGameMaster": "",
+"TycoonPlayer": ""
 }
 
 [application]

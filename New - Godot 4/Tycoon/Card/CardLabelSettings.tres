@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://027yurtj14mv"]
+
+[ext_resource type="FontFile" uid="uid://dk7klsru5ya6t" path="res://Tycoon/Card/CARDC.TTF" id="1_i6g83"]
+
+[resource]
+font = ExtResource("1_i6g83")
+font_size = 150
+font_color = Color(0, 0, 0, 1)

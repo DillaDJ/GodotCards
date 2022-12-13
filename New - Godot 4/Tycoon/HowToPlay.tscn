@@ -1,0 +1,356 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7prk2dwncgs2"]
+
+[ext_resource type="Script" path="res://Tycoon/HowToPlay.gd" id="1_75gcf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fp5dw"]
+bg_color = Color(0.0745098, 0.0705882, 0.0862745, 0.784314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf1qv"]
+bg_color = Color(0.286275, 0.27451, 0.317647, 0.784314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_5n5kl"]
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_arnd7"]
+font_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4gm6"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gsep"]
+bg_color = Color(1, 1, 1, 0.392157)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj2x0"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HowToPlay" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_75gcf")
+
+[node name="HowToPlayButton" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+tooltip_text = "How to play"
+theme_override_styles/normal = SubResource("StyleBoxFlat_fp5dw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gf1qv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fp5dw")
+text = "?"
+
+[node name="HowToPlayUI" type="Panel" parent="."]
+visible = false
+layout_direction = 2
+layout_mode = 0
+offset_left = -210.0
+offset_top = -460.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Layout" type="VBoxContainer" parent="HowToPlayUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="HowToPlayUI/Layout"]
+layout_mode = 2
+text = "How to play Tycoon"
+label_settings = SubResource("LabelSettings_5n5kl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HowToPlayUI/Layout"]
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="RuleLayout" type="VBoxContainer" parent="HowToPlayUI/Layout/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BasicRules" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+layout_mode = 2
+text = "____________________
+General
+Tycoon (also known as Scum) is
+a game of cards where the goal
+is to empty your hand
+
+- During your turn you may play 
+any card (or cards - if applicable) 
+that have a higher value than 
+the card that is currently in play.
+
+- The value of cards in ascending 
+order in Tycoon is:
+(3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2)
+
+- The last player to play a card in a 
+round is the winner of that round 
+and gets to start the next round
+
+- If you can't play a card (or don't
+want to) you may pass. If you pass, 
+you may not play another card 
+until the round finishes
+
+- The player holding the 3 of clubs 
+at the beginning of the game takes 
+the first turn"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RoundStartRule" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+Round Start
+- When starting a round (except 
+the beginning of the game where 
+you have to play the three of 
+clubs), you may play any card
+
+- You may also play up to four 
+of the same card (you may play 
+more than one three on the first 
+turn), if you do, every player 
+must play the same amount of 
+cards that you played at the
+beginning of the round"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ConsecutiveRule" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+Consecutives
+- Playing 3 cards that follow one 
+another's value in consecutive 
+order in a row forces players to 
+play in consecutive order for 
+the rest of the round
+
+(for example: if 9, 10, J, Q was 
+played in that order, the next 
+players must play K then A, etc)"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="EightsRule" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+Eight Flush
+- Playing an 8 lets you immediately 
+end the round and start a new one
+
+This also applies to playing more 
+than one 8 at a time"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RevolutionRule" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+Revolution
+ - Playing four cards at once flips 
+the values of all cards for the rest 
+of the match (2 is the lowest and 3 
+is the highest)
+
+- Other rules like 8 flushes and 
+consecutives (which will now be 
+in descending order) still apply 
+during a revolution"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="JokerRules" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+The Joker
+- The joker is a powerful wild card 
+that on its own can beat any other 
+card (including another joker)
+
+- Jokers may also be played 
+alongside any card. When they 
+are, they assume the value of the 
+card(s) they're played with"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="EndofMatchRules" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+End of Match
+- When all players but one empty 
+their hand, the game is over and 
+the players gain points depending
+on when they finished:
+
+- 1st (The Tycoon): 3 points
+- 2nd (The Rich): 2 points
+- 2nd Last (The Poor): 1 Point
+- Last (The Bankrupt): 0 Points
+Everyone else also gains 1 point
+
+- When the next match starts and
+cards are finished drawing, the 
+bankrupt player gives 2 of their 
+highest value cards to the tycoon 
+
+- The rich and poor players trade 
+one card instead of two 
+
+- If there is less than four players
+the Tycoon and Bankrupt also 
+trade one card, in this case there 
+are no rich and poor players and 
+the tycoon only gains 2 points at 
+the end of the match"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="EndofGameRules" type="Label" parent="HowToPlayUI/Layout/ScrollContainer/RuleLayout"]
+visible = false
+layout_mode = 2
+text = "____________________
+End of Game
+- The first player to 7 points wins 
+the whole game and is a wealthy 
+gigachad Tycoon who is very 
+smart and gets mad bitches
+
+- If there is less than four players,
+the first player to 5 points wins"
+label_settings = SubResource("LabelSettings_arnd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RuleButtonLayout" type="HBoxContainer" parent="HowToPlayUI/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="BasicButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Basic Rules"
+toggle_mode = true
+button_pressed = true
+text = "1"
+
+[node name="RoundStartButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Starting the Round"
+toggle_mode = true
+text = "2"
+
+[node name="ConsecutivesButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Consecutives"
+toggle_mode = true
+text = "3"
+
+[node name="EightsButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Eight Flush"
+toggle_mode = true
+text = "4"
+
+[node name="RevolutionButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Revolution"
+toggle_mode = true
+text = "5"
+
+[node name="JokerButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Jokers"
+toggle_mode = true
+text = "6"
+
+[node name="EndofMatchButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "End of Match"
+toggle_mode = true
+text = "7"
+
+[node name="EndofGameButton" type="Button" parent="HowToPlayUI/Layout/RuleButtonLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "8"
+
+[node name="Close" type="Button" parent="HowToPlayUI"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_p4gm6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2gsep")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gj2x0")
+text = "x"
+icon_alignment = 1
